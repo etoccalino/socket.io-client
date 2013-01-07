@@ -2400,7 +2400,7 @@ var io = ('undefined' === typeof module ? {} : module.exports);
 
     // Expose the latency change to the application logic.
     if (prevLatency !== this.healthcheck.data.latency) {
-      this.$emit('latency changed', {latency: this.healthcheck.data.latency});
+      this.$emit('latency changed', this.healthcheck.data.latency);
     };
 
     this.healthcheck._timeout = setTimeout(
@@ -4013,11 +4013,5 @@ var swfobject=function(){var D="undefined",r="object",S="Shockwave Flash",W="Sho
   , 'undefined' != typeof io ? io : module.parent.exports
   , this
 );
-
-
-
-if (typeof define === "function" && define.amd) {
-  define([], function () { return io; });
-}
 
 })();
