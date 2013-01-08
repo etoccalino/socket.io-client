@@ -2325,7 +2325,12 @@ var io = ('undefined' === typeof module ? {} : module.exports);
 
   function healthchecked (namespace, options) {
 
-    // Extend by method reference copying.
+    // Avoid calling on the same underlying Socket object more than once.
+    if (namespace.socket.healthchecked) {
+      return namespace;
+    }
+
+    // Extend by copying method references.
     var self = namespace;
     for (var p in healthchecked.prototype) {
       if (healthchecked.prototype.hasOwnProperty(p)) {
@@ -2345,6 +2350,9 @@ var io = ('undefined' === typeof module ? {} : module.exports);
     self.on('disconnect', function () {
       self.healthcheck._timeout && clearTimeout(self.healthcheck._timeout);
     });
+
+    // Mark the underlying socket object as healthchecked.
+    self.socket.healthchecked = true;
 
     return self;
   };

@@ -113,7 +113,7 @@ var builder = module.exports = function () {
   var transports, options, callback, error = null
     , args = Array.prototype.slice.call(arguments, 0)
     , settings = {
-        minify: false
+        minify: true
       , node: false
       , custom: []
       };
